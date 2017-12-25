@@ -2,6 +2,7 @@ export default class BaseCharacter {
   constructor(name, hp, ap) {
     this.name = name;
     this.hp = hp;
+    this.maxHp = hp;
     this.ap = ap;
     this.alive = true;
   }

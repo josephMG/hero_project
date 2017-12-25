@@ -3,12 +3,64 @@
   <head>
     <meta charset="utf-8">
     <title>Hero project</title>
+    <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js" type="module"></script>
   </head>
   <body>
-
+    <div class="screen">
+      <div id="header">
+        <div class="hp-block hero-hp-block">
+          <div class="hp-bar">
+            <div id="hero-hp-hurt" class="hp-hurt"></div>
+          </div>
+          <div class="hp-text">
+            <span id="hero-hp" class="hp hero">130<span>
+              /
+            <span class="hp hero">130<span>
+          </div>
+        </div>
+        <div class="round-background">
+          <span class="round-foreground">
+            <span id="round-num">
+              30
+            </span>
+          </span>
+        </div>
+        <div class="hp-block monster-hp-block">
+          <div class="hp-bar">
+            <div id="monster-hp-hurt" class="hp-hurt"></div>
+          </div>
+          <div class="hp-text">
+            <span id="monster-hp" class="hp monster">130<span>
+              /
+            <span class="hp monster">130<span>
+          </div>
+        </div>
+      </div>
+      <div id="plane">
+        <div class="image-block hero-image-block">
+          <img src="images/hero.png" class="character-image hero-image" alt="hero"/>
+        </div>
+        <dis class="image-block monster-image-block">
+          <img src="images/monster.png" class="character-image monster-image" alt="hero"/>
+        </div>
+      </div>
+    </div>
   </body>
 
   <script>
+    window.onkeyup = function(e) {
+      var key = e.keyCode ? e.keyCode : e.which;
+
+      if (key == 38) {
+        var hpElem = document.getElementById("hero-hp-hurt")
+        var hp = hpElem.getBoundingClientRect().width;
+        hpElem.style.width = ""+ (hp + 10) + "px";
+      }else if (key == 40) {
+        var hpElem = document.getElementById("monster-hp-hurt");
+        var hp = hpElem.getBoundingClientRect().width;
+        hpElem.style.width = ""+ (hp + 10) + "px";
+      }
+    }
   </script>
 </html>

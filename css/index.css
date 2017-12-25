@@ -1,0 +1,105 @@
+.clearfix {
+  overflow: auto;
+}
+
+.screen {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  border: solid;
+}
+
+#header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+
+}
+
+.round-background {
+  position: absolute;
+  left: 290px;
+  top: -45px;
+  border-color: transparent transparent #0000FF transparent;
+  border-style: solid solid solid solid;
+  border-width: 40px;
+  width: 40px;
+}
+
+.round-background > .round-foreground {
+  position: absolute;
+  left: -14px;
+  top: -10px;
+  border-color: transparent transparent #FFFFFF transparent;
+  border-style: solid solid solid solid;
+  border-width: 20px;
+  width: 30px;
+}
+
+.round-background > .round-foreground > #round-num {
+  position: absolute;
+  text-align: center;
+  width: 30px;
+  font-size: 20px;
+}
+
+.hp-block {
+  width: 50%;
+  height: 50px;
+  display: inline-block;
+}
+.hp-bar {
+  margin-left: 5%;
+  width: 95%;
+  height: 30px;
+  background-color: red;
+}
+
+.hp-hurt {
+  float: right;
+  width: 0%;
+  height: 100%;
+  background-color: white;
+}
+
+.hero-hp-block {
+  transform: scaleX(-1);
+}
+
+.hero-hp-block .hp-text {
+  transform: inherit;
+}
+
+.monster-hp-block {
+  margin-left: -4px;
+}
+
+.monster-hp-block .hp-text {
+  text-align: right;
+}
+
+
+#plane {
+  height: 100%;
+  text-align: center;
+}
+
+#plane:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.character-image {
+  width: 70%;
+}
+
+.image-block {
+  display: inline-block;
+  width: 49%;
+}
+
+.monster-image {
+  transform: scaleX(-1);
+}

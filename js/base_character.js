@@ -26,6 +26,17 @@ export default class BaseCharacter {
 
   getHurt(val){
     this.hp -= val;
+    var self = this;
+    var i = 1;
+    self.timeInterval = setInterval(function() {
+      self.element.getElementsByClassName("effect-image")[0].style.display = "block";
+      self.element.getElementsByClassName("effect-image")[0].src = `images/sprite/wave/images/${i}.png`;
+      i++;
+      if (i>18) {
+        self.element.getElementsByClassName("effect-image")[0].style.display = "none";
+        clearInterval(self.timeInterval);
+      }
+    }, 50);
   }
 
   updateHtml(hpElement, hurtElement) {

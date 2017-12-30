@@ -11,7 +11,9 @@ export default class BaseCharacter {
     return this.alive ;
   }
 
-  attack(character, apValue){
+  attack(character, type, apValue) {
+    if (this.isAlive() == false) return;
+    console.log(`Attack ${character.name} hp: ${apValue}`)
     character.getHurt(apValue)
     if (character.hp < 0) {
       character.die();
@@ -24,5 +26,10 @@ export default class BaseCharacter {
 
   getHurt(val){
     this.hp -= val;
+  }
+
+  updateHtml(hpElement, hurtElement) {
+    hpElement.innerHTML = this.hp;
+    hurtElement.style.width = (100 - this.hp / this.maxHp * 100) + "%"
   }
 }

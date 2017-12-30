@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Hero project</title>
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/index.js" type="module"></script>
   </head>
   <body>
     <div class="screen">
@@ -14,9 +13,9 @@
             <div id="hero-hp-hurt" class="hp-hurt"></div>
           </div>
           <div class="hp-text">
-            <span id="hero-hp" class="hp hero">130<span>
+            <span id="hero-hp" class="hp hero">130</span>
               /
-            <span class="hp hero">130<span>
+            <span id="hero-max-hp" class="hp hero">130</span>
           </div>
         </div>
         <div class="round-background">
@@ -31,18 +30,18 @@
             <div id="monster-hp-hurt" class="hp-hurt"></div>
           </div>
           <div class="hp-text">
-            <span id="monster-hp" class="hp monster">130<span>
+            <span id="monster-hp" class="hp monster">130</span>
               /
-            <span class="hp monster">130<span>
+            <span id="monster-max-hp" class="hp monster">130</span>
           </div>
         </div>
       </div>
       <div id="plane">
         <div class="image-block hero-image-block">
           <div class="skill-block">
-            <img src="images/skill1.png" class="skill-image skill1" alt="skill1" />
-            <img src="images/skill2.png" class="skill-image skill2" alt="skill2" />
-            <img src="images/skill3.png" class="skill-image skill3" alt="skill3" />
+            <img src="images/skill1.png" id="skill1" class="skill-image skill1" alt="skill1" />
+            <img src="images/skill2.png" id="skill2" class="skill-image skill2" alt="skill2" />
+            <img src="images/skill3.png" id="skill3" class="skill-image skill3" alt="skill3" />
           </div>
           <img src="images/hero.png" class="character-image hero-image" alt="hero"/>
         </div>
@@ -53,19 +52,5 @@
     </div>
   </body>
 
-  <script>
-    window.onkeyup = function(e) {
-      var key = e.keyCode ? e.keyCode : e.which;
-
-      if (key == 38) {
-        var hpElem = document.getElementById("hero-hp-hurt")
-        var hp = hpElem.getBoundingClientRect().width;
-        hpElem.style.width = ""+ (hp + 10) + "px";
-      }else if (key == 40) {
-        var hpElem = document.getElementById("monster-hp-hurt");
-        var hp = hpElem.getBoundingClientRect().width;
-        hpElem.style.width = ""+ (hp + 10) + "px";
-      }
-    }
-  </script>
+  <script src="js/index.js" type="module"></script>
 </html>

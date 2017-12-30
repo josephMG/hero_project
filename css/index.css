@@ -92,12 +92,29 @@
 }
 
 .character-image {
-  width: 70%;
+  width: 40%;
 }
 
 .image-block {
   display: inline-block;
   width: 49%;
+}
+
+.hero-image-block {
+}
+
+.hero-image-block .skill-block {
+  position: relative;
+}
+
+.hero-image-block .skill-image {
+  width: 20%;
+}
+
+.hero-image-block .skill1,
+.hero-image-block .skill3 {
+  position: relative;
+  top: 10px;
 }
 
 .monster-image {

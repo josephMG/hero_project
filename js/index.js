@@ -1,5 +1,134 @@
-import Hero from './hero.js';
-import Monster from './monster.js';
+class BaseCharacter {
+  constructor(name, hp, ap) {
+    this.name = name;
+    this.hp = hp;
+    this.maxHp = hp;
+    this.ap = ap;
+    this.alive = true;
+  }
+
+  isAlive() {
+    return this.alive ;
+  }
+
+  attack(character, type, apValue) {
+    if (this.isAlive() == false) return;
+    console.log(`Attack ${character.name} hp: ${apValue}`)
+    character.getHurt(apValue)
+    if (character.hp <= 0) {
+      character.die();
+    }
+  }
+
+  die() {
+    this.alive = false;
+  }
+
+  getHurt(val){
+    this.hp -= val;
+    if (this.hp < 0) this.hp = 0;
+    var self = this;
+    var i = 1;
+    self.timeInterval = setInterval(function() {
+      //設定P4 受攻擊動畫
+      self.element.getElementsByClassName("effect-image")[0].style.display = "block";
+      self.element.getElementsByClassName("effect-image")[0].src = `images/sprite/fire/images/Resource_10_1${i}.png`;
+      self.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
+      self.element.getElementsByClassName("hurt-text")[0].innerHTML = val;
+      i++;
+      if (i>7) {
+        //移除P4 受攻擊動畫
+        self.element.getElementsByClassName("effect-image")[0].style.display = "none";
+        self.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
+        self.element.getElementsByClassName("hurt-text")[0].innerHTML = "";
+        clearInterval(self.timeInterval);
+      }
+    }, 50);
+  }
+
+  updateHtml(hpElement, hurtElement) {
+    //更新血量文字與血條
+    hpElement.innerHTML = this.hp;
+    hurtElement.style.width = (100 - this.hp / this.maxHp * 100) + "%"
+  }
+}
+
+class Monster extends BaseCharacter {
+  constructor(name, hp, ap) {
+    super(name, hp, ap);
+
+    //取得角色html
+    this.element = document.getElementsByClassName("monster-image-block")[0];
+    this.hpElement = document.getElementById("monster-hp");
+    this.maxHpElement = document.getElementById("monster-max-hp");
+    this.hurtElement = document.getElementById("monster-hp-hurt");
+
+    this.hpElement.textContent = this.hp
+    this.maxHpElement.textContent = this.maxHp
+
+    console.log(`遇到怪獸 ${name} 了！`);
+    console.log(`生命力(HP)：${hp}`);
+    console.log(`攻擊力(AP)：${ap}`);
+    console.log("");
+  }
+
+  attack(character, type, apValue = 0) {
+    if (type == 1) {
+      var val = Math.random() * (this.ap / 2.0) + (this.ap / 2.0)
+      super.attack(character, type, Math.floor(val));
+    }
+  }
+
+  getHurt(val) {
+    super.getHurt(val)
+
+    this.updateHtml(this.hpElement, this.hurtElement)
+  }
+}
+
+class Hero extends BaseCharacter {
+  constructor(name, hp, ap) {
+    super(name, hp, ap);
+
+    //取得角色html
+    this.element = document.getElementsByClassName("hero-image-block")[0];
+    this.hpElement = document.getElementById("hero-hp");
+    this.hurtElement = document.getElementById("hero-hp-hurt");
+    this.maxHpElement = document.getElementById("hero-max-hp");
+
+    this.hpElement.textContent = this.hp
+    this.maxHpElement.textContent = this.maxHp
+
+    console.log(`你的英雄 ${name} 已經誕生了！`);
+    console.log(`生命力(HP)：${hp}`);
+    console.log(`攻擊力(AP)：${ap}`);
+    console.log("");
+  }
+
+  attack(character, type, apValue = 0) {
+    if (type == 1) {
+      //攻擊1
+      var val = Math.random() * (this.ap / 2.0) + (this.ap / 2.0)
+      super.attack(character, type, Math.floor(val));
+    } else if (type==2) {
+      //攻擊2 (+hp)
+      this.hp += 40;
+      if (this.hp > this.maxHp)
+        this.hp = this.maxHp;
+      this.updateHtml(this.hpElement, this.hurtElement);
+    } else if (type==3) {
+      //攻擊3
+      var val = Math.random() * (this.ap / 2.0) + (this.ap / 2.0) + 50;
+      super.attack(character, type, Math.floor(val));
+    }
+  }
+
+  getHurt(val) {
+    super.getHurt(val)
+    this.updateHtml(this.hpElement, this.hurtElement);
+  }
+
+}
 
 
 var hero = new Hero("Ironman", 100, 30);

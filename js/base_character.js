@@ -30,10 +30,14 @@ export default class BaseCharacter {
     var i = 1;
     self.timeInterval = setInterval(function() {
       self.element.getElementsByClassName("effect-image")[0].style.display = "block";
-      self.element.getElementsByClassName("effect-image")[0].src = `images/sprite/wave/images/${i}.png`;
+      self.element.getElementsByClassName("effect-image")[0].src = `images/sprite/fire/images/Resource_10_1${i}.png`;
+      self.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
+      self.element.getElementsByClassName("hurt-text")[0].innerHTML = val;
       i++;
-      if (i>18) {
+      if (i>7) {
         self.element.getElementsByClassName("effect-image")[0].style.display = "none";
+        self.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
+        self.element.getElementsByClassName("hurt-text")[0].innerHTML = "";
         clearInterval(self.timeInterval);
       }
     }, 50);

@@ -104,9 +104,22 @@
 
 .image-block .character-block .effect-image {
   position: absolute;
-  background: red;
   left: 120px;
   bottom: 0px;
+}
+
+.image-block .character-block .hurt-text {
+  position: absolute;
+  font-size: 40px;
+  color: red;
+  width: 100%;
+  left: 0px;
+  bottom: 50px;
+  transition: bottom 500ms;
+}
+
+.image-block .character-block .hurt-text.attacked {
+  bottom: 150px;
 }
 
 .hero-image-block {

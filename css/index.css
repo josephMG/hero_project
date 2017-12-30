@@ -155,3 +155,32 @@
 .monster-image-block.attacking {
   right: 200px;
 }
+
+#dialog {
+  display: none;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  text-align: center;
+}
+
+#dialog .dialog-block {
+  display: none;
+  position: relative;
+  margin: 0 auto;
+  padding: 30px;
+  width: 200px;
+  top: 200px;
+  background: white;
+  border: 1px solid orange;
+}
+
+#dialog.win .win-dialog {
+  display: block;
+}
+
+#dialog.lose .lose-dialog {
+  display: block;
+}

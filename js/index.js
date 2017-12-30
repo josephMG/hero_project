@@ -11,7 +11,17 @@ function isGameOver() {
   var roundElement = document.getElementById("round-num");
   roundElement.innerHTML = rounds;
 
-  return rounds != 0 && hero.isAlive() && monster.isAlive()
+  return (rounds == 0 || !hero.isAlive() || !monster.isAlive());
+}
+
+function finish() {
+  var dialog = document.getElementById("dialog")
+  dialog.style.display = "block";
+  if (monster.isAlive() == false) {
+    dialog.classList.add("win")
+  } else if (hero.isAlive() == false) {
+    dialog.classList.add("lose")
+  }
 }
 
 function heroAttack(i) {
@@ -27,16 +37,19 @@ function heroAttack(i) {
   }, 100)
 
   setTimeout(function() {
-    monster.element.classList.add("attacking")
-    setTimeout(function() {
-      monster.attack(hero, 1);
-      monster.element.classList.remove("attacking")
-    }, 500);
-    if (isGameOver()) {
+    if (monster.isAlive()){
+      monster.element.classList.add("attacking")
+      setTimeout(function() {
+        monster.attack(hero, 1);
+        monster.element.classList.remove("attacking")
+      }, 500);
+    }
+    if (isGameOver() == false) {
       document.getElementsByClassName("skill-block")[0].style.display = "block";
+    } else {
+      finish();
     }
   }, 1000)
-
 
 }
 

@@ -30,12 +30,14 @@ export default class BaseCharacter {
     var self = this;
     var i = 1;
     self.timeInterval = setInterval(function() {
+      //設定P4 受攻擊動畫
       self.element.getElementsByClassName("effect-image")[0].style.display = "block";
       self.element.getElementsByClassName("effect-image")[0].src = `images/sprite/fire/images/Resource_10_1${i}.png`;
       self.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
       self.element.getElementsByClassName("hurt-text")[0].innerHTML = val;
       i++;
       if (i>7) {
+        //移除P4 受攻擊動畫
         self.element.getElementsByClassName("effect-image")[0].style.display = "none";
         self.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
         self.element.getElementsByClassName("hurt-text")[0].innerHTML = "";
@@ -45,6 +47,7 @@ export default class BaseCharacter {
   }
 
   updateHtml(hpElement, hurtElement) {
+    //更新血量文字與血條
     hpElement.innerHTML = this.hp;
     hurtElement.style.width = (100 - this.hp / this.maxHp * 100) + "%"
   }

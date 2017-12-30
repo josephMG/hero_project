@@ -4,6 +4,7 @@ export default class Monster extends BaseCharacter {
   constructor(name, hp, ap) {
     super(name, hp, ap);
 
+    //取得角色html
     this.element = document.getElementsByClassName("monster-image-block")[0];
     this.hpElement = document.getElementById("monster-hp");
     this.maxHpElement = document.getElementById("monster-max-hp");

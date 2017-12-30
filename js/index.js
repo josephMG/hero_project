@@ -16,19 +16,29 @@ function sleep(milliseconds) {
 }
 
 function isGameOver() {
+  rounds--;
   var roundElement = document.getElementById("round-num");
   roundElement.innerHTML = rounds;
-  
+
   return rounds != 0 && hero.isAlive() && monster.isAlive()
 }
 
 function heroAttack(i) {
+  document.getElementsByClassName("skill-block")[0].style.display = "none";
+  console.log(document.getElementsByClassName("skill-block")[0]);
 
-  setTimeout(function() { hero.attack(monster, i); }, 100)
-  setTimeout(function() { monster.attack(hero, 1); }, 500)
-  rounds--;
+  setTimeout(function() {
+    hero.attack(monster, i);
+  }, 100)
 
-  isGameOver();
+  setTimeout(function() {
+    monster.attack(hero, 1);
+    if (isGameOver()) {
+      document.getElementsByClassName("skill-block")[0].style.display = "block";
+    }
+  }, 500)
+
+
 }
 
 function addSkillEvent() {

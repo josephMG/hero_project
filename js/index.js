@@ -4,7 +4,7 @@ import Monster from './monster.js';
 
 var hero = new Hero("Ironman", 100, 30);
 var monster = new Monster("Ghost", 60, 10);
-var rounds = 30, block_flag = true;
+var rounds = 10;
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -16,6 +16,9 @@ function sleep(milliseconds) {
 }
 
 function isGameOver() {
+  var roundElement = document.getElementById("round-num");
+  roundElement.innerHTML = rounds;
+  
   return rounds != 0 && hero.isAlive() && monster.isAlive()
 }
 
@@ -23,6 +26,7 @@ function heroAttack(i) {
 
   setTimeout(function() { hero.attack(monster, i); }, 100)
   setTimeout(function() { monster.attack(hero, 1); }, 500)
+  rounds--;
 
   isGameOver();
 }

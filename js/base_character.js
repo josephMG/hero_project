@@ -15,7 +15,7 @@ export default class BaseCharacter {
     if (this.isAlive() == false) return;
     console.log(`Attack ${character.name} hp: ${apValue}`)
     character.getHurt(apValue)
-    if (character.hp < 0) {
+    if (character.hp <= 0) {
       character.die();
     }
   }
@@ -26,6 +26,7 @@ export default class BaseCharacter {
 
   getHurt(val){
     this.hp -= val;
+    if (this.hp < 0) this.hp = 0;
     var self = this;
     var i = 1;
     self.timeInterval = setInterval(function() {

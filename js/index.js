@@ -12,6 +12,14 @@ function isGameOver() {
   roundElement.innerHTML = rounds;
 
   return (rounds == 0 || !hero.isAlive() || !monster.isAlive());
+  if (rounds == 0 || !hero.isAlive() || !monster.isAlive()){
+    document.getElementsByClassName("skill-block")[0].style.display = "block";
+    return true
+  }
+  else {
+    finish();
+    return false;
+  }
 }
 
 function finish() {
@@ -41,7 +49,10 @@ function heroAttack(i) {
       monster.element.classList.add("attacking")
       setTimeout(function() {
         monster.attack(hero, 1);
-        monster.element.classList.remove("attacking")
+        monster.element.classList.remove("attacking");
+        if (isGameOver() == true) {
+          finish();
+        }
       }, 500);
     }
     if (isGameOver() == false) {

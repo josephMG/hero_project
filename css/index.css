@@ -96,11 +96,14 @@
 }
 
 .image-block {
+  position: relative;
+  transition: left 500ms, right 500ms;
   display: inline-block;
   width: 49%;
 }
 
 .hero-image-block {
+  left: 0px;
 }
 
 .hero-image-block .skill-block {
@@ -117,6 +120,18 @@
   top: 10px;
 }
 
+.hero-image-block.attacking {
+  left: 200px;
+}
+
 .monster-image {
   transform: scaleX(-1);
+}
+
+.monster-image-block {
+  right: 0px;
+}
+
+.monster-image-block.attacking {
+  right: 200px;
 }

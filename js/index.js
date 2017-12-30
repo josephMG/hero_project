@@ -6,15 +6,6 @@ var hero = new Hero("Ironman", 100, 30);
 var monster = new Monster("Ghost", 60, 10);
 var rounds = 10;
 
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
 function isGameOver() {
   rounds--;
   var roundElement = document.getElementById("round-num");
@@ -25,18 +16,26 @@ function isGameOver() {
 
 function heroAttack(i) {
   document.getElementsByClassName("skill-block")[0].style.display = "none";
-  console.log(document.getElementsByClassName("skill-block")[0]);
 
   setTimeout(function() {
-    hero.attack(monster, i);
+    console.log(hero)
+    hero.element.classList.add("attacking");
+    setTimeout(function() {
+      hero.attack(monster, i);
+      hero.element.classList.remove("attacking");
+    }, 500);
   }, 100)
 
   setTimeout(function() {
-    monster.attack(hero, 1);
+    monster.element.classList.add("attacking")
+    setTimeout(function() {
+      monster.attack(hero, 1);
+      monster.element.classList.remove("attacking")
+    }, 500);
     if (isGameOver()) {
       document.getElementsByClassName("skill-block")[0].style.display = "block";
     }
-  }, 500)
+  }, 1000)
 
 
 }

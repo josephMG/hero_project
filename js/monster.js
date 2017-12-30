@@ -3,10 +3,14 @@ import BaseCharacter from './base_character.js';
 export default class Monster extends BaseCharacter {
   constructor(name, hp, ap) {
     super(name, hp, ap);
-    var hpElement = document.getElementById("monster-hp");
-    var maxHpElement = document.getElementById("monster-max-hp");
-    hpElement.textContent = this.hp
-    maxHpElement.textContent = this.maxHp
+
+    this.element = document.getElementsByClassName("monster-image-block")[0];
+    this.hpElement = document.getElementById("monster-hp");
+    this.maxHpElement = document.getElementById("monster-max-hp");
+    this.hurtElement = document.getElementById("monster-hp-hurt");
+
+    this.hpElement.textContent = this.hp
+    this.maxHpElement.textContent = this.maxHp
 
     console.log(`遇到怪獸 ${name} 了！`);
     console.log(`生命力(HP)：${hp}`);
@@ -23,9 +27,7 @@ export default class Monster extends BaseCharacter {
 
   getHurt(val) {
     super.getHurt(val)
-    var hpElement = document.getElementById("monster-hp");
-    var hurtElement = document.getElementById("monster-hp-hurt");
 
-    this.updateHtml(hpElement, hurtElement)
+    this.updateHtml(this.hpElement, this.hurtElement)
   }
 }

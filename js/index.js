@@ -27,21 +27,21 @@ class BaseCharacter {
   getHurt(val){
     this.hp -= val;
     if (this.hp < 0) this.hp = 0;
-    var self = this;
+    var _this = this;
     var i = 1;
-    self.timeInterval = setInterval(function() {
+    _this.timeInterval = setInterval(function() {
       //設定P4 受攻擊動畫
-      self.element.getElementsByClassName("effect-image")[0].style.display = "block";
-      self.element.getElementsByClassName("effect-image")[0].src = `images/sprite/fire/images/Resource_10_1${i}.png`;
-      self.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
-      self.element.getElementsByClassName("hurt-text")[0].innerHTML = val;
+      _this.element.getElementsByClassName("effect-image")[0].style.display = "block";
+      _this.element.getElementsByClassName("effect-image")[0].src = `images/sprite/fire/images/Resource_10_1${i}.png`;
+      _this.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
+      _this.element.getElementsByClassName("hurt-text")[0].innerHTML = val;
       i++;
       if (i>7) {
         //移除P4 受攻擊動畫
-        self.element.getElementsByClassName("effect-image")[0].style.display = "none";
-        self.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
-        self.element.getElementsByClassName("hurt-text")[0].innerHTML = "";
-        clearInterval(self.timeInterval);
+        _this.element.getElementsByClassName("effect-image")[0].style.display = "none";
+        _this.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
+        _this.element.getElementsByClassName("hurt-text")[0].innerHTML = "";
+        clearInterval(_this.timeInterval);
       }
     }, 50);
   }
@@ -58,7 +58,7 @@ class Monster extends BaseCharacter {
     super(name, hp, ap);
 
     //取得角色html
-    this.element = document.getElementsByClassName("monster-image-block")[0];
+    this.element = document.getElementById("monster-image-block");
     this.hpElement = document.getElementById("monster-hp");
     this.maxHpElement = document.getElementById("monster-max-hp");
     this.hurtElement = document.getElementById("monster-hp-hurt");
@@ -91,7 +91,7 @@ class Hero extends BaseCharacter {
     super(name, hp, ap);
 
     //取得角色html
-    this.element = document.getElementsByClassName("hero-image-block")[0];
+    this.element = document.getElementById("hero-image-block");
     this.hpElement = document.getElementById("hero-hp");
     this.hurtElement = document.getElementById("hero-hp-hurt");
     this.maxHpElement = document.getElementById("hero-max-hp");
@@ -104,7 +104,12 @@ class Hero extends BaseCharacter {
     console.log(`攻擊力(AP)：${ap}`);
     console.log("");
   }
-
+  heal(i) {
+    this.element.getElementsByClassName("effect-image")[0].style.display = "block";
+    this.element.getElementsByClassName("effect-image")[0].src = `images/sprite/circle2/images/Resource_0${i}.png`;
+    this.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
+    this.element.getElementsByClassName("hurt-text")[0].innerHTML = "40";
+  }
   attack(character, type, apValue = 0) {
     if (type == 1) {
       //攻擊1
@@ -115,6 +120,14 @@ class Hero extends BaseCharacter {
       this.hp += 40;
       if (this.hp > this.maxHp)
         this.hp = this.maxHp;
+      var _this = this, i=0;
+      var timeInterval = setInterval(function() {
+        _this.heal(i++);
+      }, 100);
+      setTimeout(function() {
+        clearInterval(timeInterval)
+        _this.element.getElementsByClassName("effect-image")[0].style.display = "none";
+      }, 400);
       this.updateHtml(this.hpElement, this.hurtElement);
     } else if (type==3) {
       //攻擊3
@@ -162,7 +175,9 @@ function heroAttack(i) {
   setTimeout(function() {
     // Hero 攻擊
     // Hero 移動動畫 css class
-    hero.element.classList.add("attacking");
+    if (i!=2) {
+      hero.element.classList.add("attacking");
+    }
     setTimeout(function() {
       hero.attack(monster, i);
       hero.element.classList.remove("attacking");
@@ -191,6 +206,15 @@ function heroAttack(i) {
     }
   }, 1000)
 
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
 
 function addSkillEvent() {

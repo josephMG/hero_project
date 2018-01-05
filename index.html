@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-    <div class="screen">
+    <div id="screen">
       <div id="header">
         <div class="hp-block hero-hp-block">
           <div class="hp-bar">
-            <div id="hero-hp-hurt" class="hp-hurt"></div>
+            <div id="hero-hp-hurt"></div>
           </div>
           <div class="hp-text">
             <span id="hero-hp" class="hp hero">130</span>
@@ -18,16 +18,12 @@
             <span id="hero-max-hp" class="hp hero">130</span>
           </div>
         </div>
-        <div class="round-background">
-          <span class="round-foreground">
-            <span id="round-num">
-              10
-            </span>
-          </span>
+        <div id="round-num">
+          10
         </div>
         <div class="hp-block monster-hp-block">
           <div class="hp-bar">
-            <div id="monster-hp-hurt" class="hp-hurt"></div>
+            <div id="monster-hp-hurt"></div>
           </div>
           <div class="hp-text">
             <span id="monster-hp" class="hp monster">130</span>
@@ -37,7 +33,7 @@
         </div>
       </div>
       <div id="plane">
-        <div class="image-block hero-image-block">
+        <div id="hero-image-block">
           <div class="skill-block">
             <img src="images/skill1.png" id="skill1" class="skill-image skill1" alt="skill1" />
             <img src="images/skill2.png" id="skill2" class="skill-image skill2" alt="skill2" />
@@ -49,7 +45,7 @@
             <span class="hurt-text">  </span>
           </div>
         </div>
-        <dis class="image-block monster-image-block">
+        <dis id="monster-image-block">
           <div class="character-block">
             <img src="images/monster.png" class="character-image monster-image" alt="hero"/>
             <img class="effect-image" alt="effect" style="display: none"/>
@@ -57,11 +53,11 @@
           </div>
         </div>
         <div id="dialog">
-          <div class="dialog-block win-dialog">
+          <div class="win-dialog">
             <h2> You Win!!! </h2>
             <button onclick="window.location.reload();"> Play again? </button>
           </div>
-          <div class="dialog-block lose-dialog">
+          <div class="lose-dialog">
             <h2> You Lose! </h2>
             <button onclick="window.location.reload();"> Try again? </button>
           </div>
